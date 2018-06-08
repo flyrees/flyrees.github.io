@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="想要用cocopods管理自己封装的库、首先有自己的GitHub账号，在GitHub创建自己的项目仓库、如下图：注意：项目要想用cocoapods管理红色框里内容是必须要选的。然后克隆自己的项目到本地，将自己封装好的库提交到GitHub。(这是第一步，也就是怎么在Github创建自己的项目，还有个要注意的地方就是，要想让别人可以用cocoapods使用自己的库，项目必须是公开的，不过GitHub的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用cocopods管理自己封装的库、控件">
+<meta property="og:url" content="https://flyrees.github.io/2018/06/08/iOS-用cocoapods管理自己的封装的组件和framework/index.html">
+<meta property="og:site_name" content="Flyrees">
+<meta property="og:description" content="想要用cocopods管理自己封装的库、首先有自己的GitHub账号，在GitHub创建自己的项目仓库、如下图：注意：项目要想用cocoapods管理红色框里内容是必须要选的。然后克隆自己的项目到本地，将自己封装好的库提交到GitHub。(这是第一步，也就是怎么在Github创建自己的项目，还有个要注意的地方就是，要想让别人可以用cocoapods使用自己的库，项目必须是公开的，不过GitHub的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-3519c106914469b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-a1d55519435e211d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-7ead7d96abc4f8f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-58dec9b7ff69c3b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-7cfaf2a91cd3d27b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-4f15247a86eb73a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-55ba09c74c6d3286.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-bd9c22e093f380c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-5367185969eaaf5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-755955eabf6e0960.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-452c8abc5334f715.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-15a31a0d744ec3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-993b2f3e998dfe74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-879066c452adceb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-295b82762062e348.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-99496979018ca4c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-ed81308f885b30f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-fcc0688d36e9a436.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-6895869c87d20451.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-6a2fc31e8d57a08f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2021171-230623136814fb28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-06-08T05:36:13.942Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用cocopods管理自己封装的库、控件">
+<meta name="twitter:description" content="想要用cocopods管理自己封装的库、首先有自己的GitHub账号，在GitHub创建自己的项目仓库、如下图：注意：项目要想用cocoapods管理红色框里内容是必须要选的。然后克隆自己的项目到本地，将自己封装好的库提交到GitHub。(这是第一步，也就是怎么在Github创建自己的项目，还有个要注意的地方就是，要想让别人可以用cocoapods使用自己的库，项目必须是公开的，不过GitHub的">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2021171-3519c106914469b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":13,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://flyrees.github.io/2018/06/08/iOS-用cocoapods管理自己的封装的组件和framework/"/>
+
+
+
+
+
+  <title>用cocopods管理自己封装的库、控件 | Flyrees</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Flyrees</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">2018、遇见更好的自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://flyrees.github.io/2018/06/08/iOS-用cocoapods管理自己的封装的组件和framework/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flyrees">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/WechatIMG93.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flyrees">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用cocopods管理自己封装的库、控件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T11:19:02+08:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>想要用cocopods管理自己封装的库、首先有自己的GitHub账号，在GitHub创建自己的项目仓库、如下图：<img src="http://upload-images.jianshu.io/upload_images/2021171-3519c106914469b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="13356DB1-9816-4F8F-BE3D-1B1658EEB4D8.png"><br>注意：项目要想用cocoapods管理红色框里内容是必须要选的。<br>然后克隆自己的项目到本地，将自己封装好的库提交到GitHub。(这是第一步，也就是怎么在Github创建自己的项目，还有个要注意的地方就是，要想让别人可以用cocoapods使用自己的库，项目必须是公开的，不过GitHub的私有仓库是花钱滴)。</p>
+<p>下面是重点：<br>创建cocoapods账号，发布到cocoapods上你需要一个cocoapods账号，使用终端输入：pod trunk me 查看自己是否注册cocoapods，注册过是这样滴：<img src="http://upload-images.jianshu.io/upload_images/2021171-a1d55519435e211d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="71D21BAE-0920-4DA3-A793-8224C0020FF7.png"><br>没注册就输入：pod trunk register <a href="mailto:1234567@qq.com" target="_blank" rel="noopener">1234567@qq.com</a>  ‘neme’<br>邮箱最好是注册GitHub的邮箱，name自己随便起，当然我这个邮箱是随便瞎编的<br>执行以上命令你的邮箱就会收到cocoapods给你发的一封邮件,看下图：<br><img src="http://upload-images.jianshu.io/upload_images/2021171-7ead7d96abc4f8f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ABF09B5E-7700-4A82-9E7E-3C8A9BD10F4C.png"><br>然后去验证邮箱，验证成功你的cocoapods账号就注册成功了。<br>再回到刚才GitHub克隆的项目，使用终端使用命令 pod spec create 项目名 创建 podspec 文件,然后配置 podspec。<br>以下下为podspec文件内容：<br><img src="http://upload-images.jianshu.io/upload_images/2021171-58dec9b7ff69c3b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="11689A07-1F9E-4450-AC77-735602252633.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-7cfaf2a91cd3d27b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2BA348C7-6D2E-455C-8D63-E5DE1FE2EF6C.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-4f15247a86eb73a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5A73890E-99DE-4B66-BE57-D926688D7479.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-55ba09c74c6d3286.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="043B2750-F067-40DB-9B56-19628799EF32.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-bd9c22e093f380c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E40AA5DC-1C00-48BA-8E56-2716F8D9E081.png"></p>
+<p>设置好之后提交GitHub，使用终端命令：pod lib lint 进行验证:<br><img src="http://upload-images.jianshu.io/upload_images/2021171-5367185969eaaf5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="522482EF-EEAA-401F-8D86-7F7B2E9D64B3.png"><br>podspec 容易出现各种错误通过，这种错误使用命令：pod lib lint –allow-warnings 就可以通过，通过后是这样：<br><img src="http://upload-images.jianshu.io/upload_images/2021171-755955eabf6e0960.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9950CE06-9C3B-4E91-823C-75713F84B32C.png"></p>
+<p>这里需要说的，如果你的sdk 需要版本更新，提交代码到GitHub，重新设置tag即可，tag可以直接在podspec文件改，然后提交podspec文件。也可以使用命令：<br>git tag ‘0.0.3’<br>git add *<br>git push origin 0.0.3<br>这样设置。</p>
+<p>如果你想提交一个自己生成的 framework 库，请看下面，和普通封装文件不同的是podspec文件配置<br>————————— framework ————————–</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2021171-452c8abc5334f715.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7B5A9387-9C9B-4F7C-8FEA-2B9E7DD7E60C.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-15a31a0d744ec3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2C2D4549-29B9-4323-A939-05ED805BE4D9.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-993b2f3e998dfe74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1EAAC042-871D-4F04-A916-C4F86ED7276D.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-879066c452adceb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6BDD21CE-1C21-4F94-AD94-8398F4C8C86A.png"><img src="http://upload-images.jianshu.io/upload_images/2021171-295b82762062e348.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F3645A56-9F9C-4744-BA95-4A44ABCF62A0.png"></p>
+<p>不同的就是红色标注的地方、别的都一样。</p>
+<p>如果podspec 文件验证通过，给podspec打上一个tag。在终端里执行，<br>git tag ‘0.0.3’<br>git add *<br>git push origin 0.0.3<br>然后就可以将podspec提交到cocoapods了，使用命令：pod trunk push PFRollMenu.podspec<br><img src="http://upload-images.jianshu.io/upload_images/2021171-99496979018ca4c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D40E0746-113E-4B86-A606-FF53D79FBF50.png"><br>如果出现以上错误，可以使用命令：<img src="http://upload-images.jianshu.io/upload_images/2021171-ed81308f885b30f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A074EEF0-952C-468B-8D00-A4EEDFC3A522.png"></p>
+<p>这里如果你提交的是framework 库、tag 最好加上 “v0.0.1”,要不然可能会出错，当时我有一个错误，但忘记什么错误了。</p>
+<p>提交成功后是这样：<img src="http://upload-images.jianshu.io/upload_images/2021171-fcc0688d36e9a436.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D1F93AF1-6543-455B-B104-165B88871311.png"></p>
+<p>这样封装的库就提交到了cocoapods。以后就可以直接用cocoapods导入了。<br>然后用cocoadops搜索一下刚才提交的东西,输入命令：pod search PFRollMenu<br>结果发现搜索不到，如下图：<img src="http://upload-images.jianshu.io/upload_images/2021171-6895869c87d20451.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="FC2E52B6-A4C6-4FCA-8F7B-ECB87567B482.png">不要着急，哈哈，输入命令：pod repo update<br>再输入搜索命令还发现搜索不到，然后输入命令：pod search PFRollMenu –simple<br><img src="http://upload-images.jianshu.io/upload_images/2021171-6a2fc31e8d57a08f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="169A5586-1E07-48AF-8C34-B654D92DCE0B.png"><br>发现搜索成功了：<img src="http://upload-images.jianshu.io/upload_images/2021171-230623136814fb28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="614973CA-4389-4A32-A2CB-7F0326B02872.png"></p>
+<p>后记：<br>cocoapods 管理的东西也可以是私有的(就是别人不能导入，只能自己和授权的人使用)、具体怎么用cocoapods 私有的东西、请看下篇博客（不是我写的哦、是转载别人的，但亲测非常好用）。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/08/ReactiveCocoa导入/" rel="next" title="ReactiveCocoa的导入">
+                <i class="fa fa-chevron-left"></i> ReactiveCocoa的导入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/08/iOS安全-代码混淆/" rel="prev" title="iOS安全-代码混淆">
+                iOS安全-代码混淆 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/WechatIMG93.jpeg"
+                alt="flyrees" />
+            
+              <p class="site-author-name" itemprop="name">flyrees</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flyrees" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5779058257" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://my.oschina.net/fllyguo" target="_blank" title="开源中国">
+                      
+                        <i class="fa fa-fw fa-google"></i>开源中国</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/77bbcf25cb53" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-google"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flyrees</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
